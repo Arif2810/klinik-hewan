@@ -15,7 +15,7 @@ include_once('../_header.php');
 		<div class="col-lg-6 col-lg-offset-3">
 			<?php
 			$id = @$_GET['id'];
-			$sql_rekammedis = mysqli_query($con, "SELECT * FROM tb_rekammedis INNER JOIN tb_pasien ON tb_rekammedis.id_pasien = tb_pasien.id_pasien INNER JOIN tb_dokter ON tb_rekammedis.id_dokter = tb_dokter.id_dokter WHERE id_rm ='$id'") or die(mysqli_error($con));
+			$sql_rekammedis = mysqli_query($con, "SELECT * FROM tb_rekammedis INNER JOIN tb_satwa ON tb_rekammedis.id_satwa = tb_satwa.id_satwa INNER JOIN tb_user ON tb_rekammedis.id_user = tb_user.id_user WHERE id_rm = '$id'") or die(mysqli_error($con));
 			$data = mysqli_fetch_array($sql_rekammedis);
 			?>
 			<form action="proses.php" method="post">
@@ -25,19 +25,19 @@ include_once('../_header.php');
 					<input type="date" name="tgl" id="tgl" class="form-control" value="<?= $data['tgl_periksa'] ?>" required="" autofocus="">
 				</div>
 				<div class="form-group">
-					<label for="pasien">Nama Pasien</label>
-					<select name="pasien" id="pasien" class="form-control" required="">
+					<label for="satwa">Nama Satwa</label>
+					<select name="satwa" id="satwa" class="form-control" required>
 						<option value="">- Pilih -</option>
 						<?php
-						$sql_pasien = mysqli_query($con, "SELECT * FROM tb_pasien") or die(mysqli_error($con));
-						while($data_pasien = mysqli_fetch_array($sql_pasien)){
-							if($data['id_pasien'] == $data_pasien['id_pasien']){
+						$sql_satwa = mysqli_query($con, "SELECT * FROM tb_satwa") or die(mysqli_error($con));
+						while($data_satwa = mysqli_fetch_array($sql_satwa)){
+							if($data['id_satwa'] == $data_satwa['id_satwa']){
 								$select = "selected";
 							}
 							else{
 								$select = "";
 							}
-							echo '<option '.$select.' value="'.$data_pasien['id_pasien'].'">'.$data_pasien['nama_pasien'].'</option>';
+							echo '<option '.$select.' value="'.$data_satwa['id_satwa'].'">'.$data_satwa['nama_satwa'].'</option>';
 						}
 						?>
 					</select>
@@ -51,15 +51,15 @@ include_once('../_header.php');
 					<select name="dokter" id="dokter" class="form-control" required="">
 						<option value="">- Pilih -</option>
 						<?php
-						$sql_dokter = mysqli_query($con, "SELECT * FROM tb_dokter") or die(mysqli_error($con));
+						$sql_dokter = mysqli_query($con, "SELECT * FROM tb_user WHERE level = 3") or die(mysqli_error($con));
 						while($data_dokter = mysqli_fetch_array($sql_dokter)){
-							if($data['id_dokter'] == $data_dokter['id_dokter']){
+							if($data['id_user'] == $data_dokter['id_user']){
 								$select = "selected";
 							}
 							else{
 								$select = "";
 							}
-							echo '<option '.$select.' value="'.$data_dokter['id_dokter'].'">'.$data_dokter['nama_dokter'].'</option>';
+							echo '<option '.$select.' value="'.$data_dokter['id_user'].'">'.$data_dokter['nama_user'].'</option>';
 						} ?>
 					</select>
 				</div>
@@ -68,17 +68,18 @@ include_once('../_header.php');
 					<textarea name="diagnosa" id="diagnosa" class="form-control" required="" rows="4"><?= $data['diagnosa']; ?></textarea>
 				</div>
 				<div class="form-group">
+					<label for="tindakan">Tindakan</label>
+					<textarea name="tindakan" id="tindakan" class="form-control" required="" rows="4"><?= $data['tindakan']; ?></textarea>
+				</div>
+				<div class="form-group">
 					<label for="obat">Obat</label>
-
 					<?php
 						$sql_rm_obat = mysqli_query($con, "SELECT * FROM tb_rm_obat WHERE id_rm='$id'") or die(mysqli_error($con));
 						while($data_rm_obat = mysqli_fetch_array($sql_rm_obat)){
 							$selected_obat[] = $data_rm_obat['id_obat'];
 						}
 					?>
-					
 					<select multiple="" size="7" name="obat[]" id="obat" class="form-control" required="">
-
 						<?php
 							$sql_obat = mysqli_query($con, "SELECT * FROM tb_obat") or die(mysqli_error($con));
 							while($data_obat = mysqli_fetch_array($sql_obat)){ ?>
@@ -90,11 +91,9 @@ include_once('../_header.php');
 								} ?>>
 								<?= $data_obat['nama_obat']; ?>
 								</option>
-
 							<?php
 							}
 						?>
-
 					</select>
 				</div>
 				<div class="form-group">

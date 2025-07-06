@@ -19,13 +19,13 @@ include_once('../_header.php');
 					<input type="date" name="tgl" id="tgl" class="form-control" value="<?= date('Y-m-d') ?>" required="" autofocus="">
 				</div>
 				<div class="form-group">
-					<label for="pasien">Nama Pasien</label>
-					<select name="pasien" id="pasien" class="form-control" required="">
+					<label for="satwa">Nama Satwa</label>
+					<select name="satwa" id="satwa" class="form-control" required="">
 						<option value="">- Pilih -</option>
 						<?php
-						$sql_pasien = mysqli_query($con, "SELECT * FROM tb_pasien") or die(mysqli_error($con));
-						while($data_pasien = mysqli_fetch_array($sql_pasien)){
-							echo '<option value="'.$data_pasien['id_pasien'].'">'.$data_pasien['nama_pasien'].'</option>';
+						$sql_satwa = mysqli_query($con, "SELECT * FROM tb_satwa") or die(mysqli_error($con));
+						while($data_satwa = mysqli_fetch_array($sql_satwa)){
+							echo '<option value="'.$data_satwa['id_satwa'].'">'.$data_satwa['nama_satwa'].'</option>';
 						} ?>
 					</select>
 				</div>
@@ -38,15 +38,19 @@ include_once('../_header.php');
 					<select name="dokter" id="dokter" class="form-control" required="">
 						<option value="">- Pilih -</option>
 						<?php
-						$sql_dokter = mysqli_query($con, "SELECT * FROM tb_dokter") or die(mysqli_error($con));
+						$sql_dokter = mysqli_query($con, "SELECT * FROM tb_user WHERE level = 3") or die(mysqli_error($con));
 						while($data_dokter = mysqli_fetch_array($sql_dokter)){
-							echo '<option value="'.$data_dokter['id_dokter'].'">'.$data_dokter['nama_dokter'].'</option>';
+							echo '<option value="'.$data_dokter['id_user'].'">'.$data_dokter['nama_user'].'</option>';
 						} ?>
 					</select>
 				</div>
 				<div class="form-group">
 					<label for="diagnosa">Diagnosa</label>
 					<textarea name="diagnosa" id="diagnosa" class="form-control" required="" rows="4"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="tindakan">Tindakan</label>
+					<textarea name="tindakan" id="tindakan" class="form-control" required="" rows="4"></textarea>
 				</div>
 				<div class="form-group">
 					<label for="obat">Obat</label>
