@@ -1,4 +1,15 @@
-<?php include_once('../_header.php'); ?>
+<?php include_once('../_header.php');
+
+if($_SESSION['level'] == 3){
+  echo "
+  <script>
+    alert('Halaman tidak ditemukan!');
+    window.location = '../index.php';
+  </script>
+  ";
+  exit();
+}
+?>
 
 	<div class="box">
 		<h1>Obat</h1>

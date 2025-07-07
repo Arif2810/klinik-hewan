@@ -36,7 +36,7 @@ if(!isset($_SESSION['user'])){
 		<div id="sidebar-wrapper">
 			<ul class="sidebar-nav">
 				<li class="sidebar-brand">
-					<a href=""><span class="text-primary">Klinik Hewan</span></a>
+					<a href="<?= base_url() ?>"><span class="text-primary">Klinik Hewan</span></a>
 				</li>
 				<li>
 					<a href="<?= base_url('dashboard'); ?>">Dashboard</a>
@@ -44,21 +44,30 @@ if(!isset($_SESSION['user'])){
 				<li>
 					<a href="<?= base_url('satwa/data.php') ?>">Data Satwa</a>
 				</li>
-				<li>
-					<a href="<?= base_url('jenis/data.php') ?>">Jenis Satwa</a>
-				</li>
-				<li>
-					<a href="<?= base_url('dokter/data.php') ?>">Data Dokter</a>
-				</li>
-				<li>
-					<a href="<?= base_url('obat/data.php') ?>">Data Obat</a>
-				</li>
+				<?php
+				if($_SESSION['level'] != 3){ ?>
+					<li>
+						<a href="<?= base_url('jenis/data.php') ?>">Jenis Satwa</a>
+					</li>
+					<li>
+						<a href="<?= base_url('dokter/data.php') ?>">Data Dokter</a>
+					</li>
+				<?php } ?>
+				<?php
+				if($_SESSION['level'] != 3){ ?>
+					<li>
+						<a href="<?= base_url('obat/data.php') ?>">Data Obat</a>
+					</li>
+				<?php } ?>
 				<li>
 					<a href="<?= base_url('rekammedis/data.php') ?>">Rekam Medis</a>
 				</li>
-				<li>
-					<a href="<?= base_url('user/data.php') ?>">User</a>
-				</li>
+				<?php 
+				if($_SESSION['level'] == 1){ ?>
+					<li>
+						<a href="<?= base_url('user/data.php') ?>">User</a>
+					</li>
+				<?php } ?>
 				<li>
 					<a href="<?= base_url('password/data.php') ?>">Ganti Password</a>
 				</li>
