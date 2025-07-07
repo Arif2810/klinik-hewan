@@ -62,6 +62,7 @@ else{
 						$sql_login = mysqli_query($con, "SELECT * FROM tb_user WHERE username = '$user' AND password = '$pass'") or die(mysqli_error($con));
 						if(mysqli_num_rows($sql_login) > 0){
 							$row = mysqli_fetch_assoc($sql_login);
+							$_SESSION['login'] = true;
 							$_SESSION['user']  = $user;
 							$_SESSION['nama']  = $row['nama_user'];
 							$_SESSION['level'] = $row['level'];

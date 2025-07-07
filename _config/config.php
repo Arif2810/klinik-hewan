@@ -31,3 +31,13 @@ function tgl_indo($tgl){
 
 	return $tanggal."/".$bulan."/".$tahun;
 }
+
+// Function untuk umur
+function htgUmur($tgl_lahir){
+  $tglLahir = new DateTime($tgl_lahir);
+  $hariini = new DateTime('today');
+
+  $umur = $hariini->diff($tglLahir)->y;
+  return $umur . ' tahun';
+}
+

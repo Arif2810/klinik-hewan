@@ -1,5 +1,5 @@
 <?php
-require_once"_config/config.php";
+require_once "_config/config.php";
 require "_assets/libs/vendor/autoload.php";
 
 if(!isset($_SESSION['user'])){
@@ -61,6 +61,9 @@ if(!isset($_SESSION['user'])){
 				<?php } ?>
 				<li>
 					<a href="<?= base_url('rekammedis/data.php') ?>">Rekam Medis</a>
+				</li>
+				<li>
+					<a href="<?= base_url('riwayat/data.php') ?>">Riwayat Rekam Medis</a>
 				</li>
 				<?php 
 				if($_SESSION['level'] == 1){ ?>
