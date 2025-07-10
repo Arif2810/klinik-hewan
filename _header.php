@@ -47,18 +47,12 @@ if(!isset($_SESSION['user'])){
 				<?php
 				if($_SESSION['level'] != 3){ ?>
 					<li>
-						<a href="<?= base_url('jenis/data.php') ?>">Jenis Satwa</a>
-					</li>
-					<li>
 						<a href="<?= base_url('dokter/data.php') ?>">Data Dokter</a>
 					</li>
 				<?php } ?>
-				<?php
-				if($_SESSION['level'] != 3){ ?>
-					<li>
-						<a href="<?= base_url('obat/data.php') ?>">Data Obat</a>
-					</li>
-				<?php } ?>
+				<li>
+					<a href="<?= base_url('obat/data.php') ?>">Data Obat</a>
+				</li>
 				<li>
 					<a href="<?= base_url('rekammedis/data.php') ?>">Rekam Medis</a>
 				</li>

@@ -26,7 +26,7 @@
 				</thead>
 				<tbody>
 					<?php
-						$query = "SELECT * FROM tb_satwa INNER JOIN tb_jenis ON tb_satwa.id_jenis = tb_jenis.id_jenis ORDER BY nama_satwa ASC
+						$query = "SELECT * FROM tb_satwa ORDER BY nama_satwa ASC
 						";
 						$sql_satwa = mysqli_query($con, $query) or die(mysqli_error($con));
 						while($data = mysqli_fetch_array($sql_satwa)){ ?>

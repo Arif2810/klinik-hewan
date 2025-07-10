@@ -31,20 +31,7 @@ include_once('../_header.php');
 				</div>
 				<div class="form-group">
 					<label for="jenis">Jenis Satwa</label>
-					<select name="jenis" id="jenis" class="form-control" required>
-						<option value="">-- Pilih --</option>
-						<?php
-						$sql_jenis = mysqli_query($con, "SELECT * FROM tb_jenis ORDER BY jenis ASC") or die(mysqli_error($con));
-						while($data_jenis = mysqli_fetch_array($sql_jenis)){
-							if($data['id_jenis'] == $data_jenis['id_jenis']){
-								$select = "selected";
-							}
-							else{
-								$select = "";
-							}
-							echo '<option '.$select.' value="'.$data_jenis['id_jenis'].'">'.$data_jenis['jenis'].'</option>';
-						} ?>
-					</select>
+					<input type="text" name="jenis" id="jenis" class="form-control" value="<?= $data['jenis'] ?>" required>
 				</div>
 				<div class="form-group">
 					<label for="jk">Jenis Kelamin</label>

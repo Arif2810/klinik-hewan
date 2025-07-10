@@ -32,7 +32,6 @@ if($_SESSION['level'] != 1){
 								</center>
 							</th>
 							<th>No.</th>
-							<th>Id User</th>
 							<th>Nama</th>
 							<th>Username</th>
 							<th>Level</th>
@@ -51,7 +50,6 @@ if($_SESSION['level'] != 1){
 									<input type="checkbox" name="checked[]" class="check" value="<?= $data['id_user']; ?>">
 								</td>
 								<td><?= $no++; ?>.</td>
-								<td><?= $data['id_user']; ?></td>
 								<td><?= $data['nama_user']; ?></td>
 								<td><?= $data['username']; ?></td>
 								<td>
@@ -88,7 +86,7 @@ if($_SESSION['level'] != 1){
 			columnDefs: [{
 				"searchable": false,
 				"orderable": false,
-				"targets": [0, 4]
+				"targets": [0, 3]
 			}],
 			"order": [1, "asc"]
 		});

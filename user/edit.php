@@ -20,10 +20,7 @@ include_once('../_header.php');
 			?>
 			<form action="proses.php" method="post">
 				<div class="form-group">
-					<label for="id_user">ID User</label>
-					<input type="text" name="id_user" id="id_user" value="<?= $data['id_user'] ?>" class="form-control" readonly>
-				</div>
-				<div class="form-group">
+					<input type="hidden" name="id_user" id="id_user" value="<?= $data['id_user'] ?>">
 					<label for="nama">Nama</label>
 					<input type="text" name="nama" id="nama" value="<?= $data['nama_user'] ?>" class="form-control" required="" autofocus="">
 				</div>

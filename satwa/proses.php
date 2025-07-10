@@ -45,7 +45,7 @@ else if(isset($_POST['edit'])){
 		mysqli_query($con, "UPDATE tb_satwa SET 
 			nomor_identitas = '$identitas', 
 			nama_satwa = '$nama', 
-			id_jenis = '$jenis', 
+			jenis = '$jenis', 
 			jenis_kelamin='$jk', 
 			tgl_lahir = '$tgl_lahir', 
 			kelas = '$kelas', 

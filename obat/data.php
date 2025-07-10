@@ -1,18 +1,8 @@
-<?php include_once('../_header.php');
-
-if($_SESSION['level'] == 3){
-  echo "
-  <script>
-    alert('Halaman tidak ditemukan!');
-    window.location = '../index.php';
-  </script>
-  ";
-  exit();
-}
-?>
+<?php include_once('../_header.php');?>
 
 	<div class="box">
 		<h1>Obat</h1>
+		<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
 		<h4>
 			<small>Data Obat</small>
 			<div class="pull-right">
