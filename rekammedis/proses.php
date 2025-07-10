@@ -12,9 +12,19 @@ if(isset($_POST['add'])){
 	$dokter 	= trim(mysqli_real_escape_string($con, $_POST['dokter']));
 	$diagnosa = trim(mysqli_real_escape_string($con, $_POST['diagnosa']));
 	$tindakan = trim(mysqli_real_escape_string($con, $_POST['tindakan']));
+	$gambar   = trim(htmlspecialchars($_FILES['gambar']['name']));
+
+	// Cek gambar
+  if($gambar != null){
+    $url = 'add.php';
+    $gambar = uploadGbr($url);
+  }
+  else{
+    $gambar = 'default.png';
+  }
 
 	// insert ke tb_rekammedis
-	mysqli_query($con, "INSERT INTO tb_rekammedis VALUES('$uuid', '$tgl', '$satwa', '$keluhan', '$dokter', '$diagnosa', '$tindakan')") or die(mysqli_error($con));
+	mysqli_query($con, "INSERT INTO tb_rekammedis VALUES('$uuid', '$tgl', '$satwa', '$keluhan', '$dokter', '$diagnosa', '$tindakan', '$gambar')") or die(mysqli_error($con));
 
 	// mendeklarasikan obat
 	$obat = $_POST['obat'];
@@ -32,9 +42,31 @@ else if(isset($_POST['edit'])){
 	$dokter 	= trim(mysqli_real_escape_string($con, $_POST['dokter']));
 	$diagnosa = trim(mysqli_real_escape_string($con, $_POST['diagnosa']));
 	$tindakan = trim(mysqli_real_escape_string($con, $_POST['tindakan']));
+	$gambar   = trim(htmlspecialchars($_FILES['gambar']['name']));
+	$gbrLama  = $_POST['gbrLama'];
+
+	// Cek gambar
+  if($gambar != null){
+    $url = 'data.php';
+    $gbrSatwa = uploadGbr($url);
+    if($gbrLama !== 'default.png'){
+      @unlink('../_assets/gambar/' . $gbrLama);
+    }
+  }
+  else{
+    $gbrSatwa = $gbrLama;
+  }
 
 	//update ke tabel rekammedis
-	mysqli_query($con, "UPDATE tb_rekammedis SET tgl_periksa = '$tgl', id_satwa = '$satwa', keluhan = '$keluhan', id_user = '$dokter', diagnosa = '$diagnosa', tindakan = '$tindakan' WHERE id_rm = '$id'") or die(mysqli_error($con));
+	mysqli_query($con, "UPDATE tb_rekammedis SET 
+		tgl_periksa = '$tgl', 
+		id_satwa 		= '$satwa', 
+		keluhan 		= '$keluhan', 
+		id_user 		= '$dokter', 
+		diagnosa 		= '$diagnosa', 
+		tindakan 		= '$tindakan',
+		gambar 			= '$gbrSatwa' 
+	WHERE id_rm = '$id'") or die(mysqli_error($con));
 
 	// mendeklarasikan obat
 	$obat = $_POST['obat'];

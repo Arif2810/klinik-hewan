@@ -23,6 +23,41 @@ function base_url($url = null){
 	}
 }
 
+// Function untuk upload gambar
+function uploadGbr($url){
+  $namafile = $_FILES['gambar']['name'];
+  $ukuran = $_FILES['gambar']['size'];
+  $tmp = $_FILES['gambar']['tmp_name'];
+
+  $ekstensiValid = ['jpg', 'jpeg', 'png', 'gif'];
+  $ekstensiFile = explode('.', $namafile);
+  $ekstensiFile = strtolower(end($ekstensiFile));
+
+  if(!in_array($ekstensiFile, $ekstensiValid)){
+    echo "
+      <script>
+        alert('Input user gagal, file yang anda upload bukan gambar!');
+        window.location = '$url';
+      </script>
+    ";
+    die();
+  }
+
+  if($ukuran > 10000000){
+    echo "
+      <script>
+        alert('Input user gagal, maksimal ukuran gambar 10 MB!');
+        window.location = '$url';
+      </script>
+    ";
+    die();
+  }
+
+  $namafileBaru = time() . '-' . $namafile;
+  move_uploaded_file($tmp, '../_assets/gambar/' . $namafileBaru);
+  return $namafileBaru;
+}
+
 // function untuk tgl format indonesia
 function tgl_indo($tgl){
 	$tanggal = substr($tgl, 8, 2);

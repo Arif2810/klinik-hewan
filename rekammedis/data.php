@@ -54,7 +54,7 @@
 								</td>
 								<td align="center">
 									<a href="edit.php?id=<?= $data['id_rm'] ?>" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-edit"></i></a>
-									<a href="del.php?id=<?= $data['id_rm']; ?>" class="btn btn-danger btn-xs" onclick="return confirm('Yakin menghapus data?')"><i class="glyphicon glyphicon-trash"></i></a>
+									<a href="del.php?id=<?= $data['id_rm']; ?>&gambar=<?= $data['gambar'] ?>" class="btn btn-danger btn-xs" onclick="return confirm('Yakin menghapus data?')"><i class="glyphicon glyphicon-trash"></i></a>
 								</td>
 							</tr>
 						<?php

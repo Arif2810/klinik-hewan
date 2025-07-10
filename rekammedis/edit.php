@@ -11,14 +11,16 @@ include_once('../_header.php');
 			<a href="data.php" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-chevron-left"></i> Kembali</a>
 		</div>
 	</h4>
-	<div class="row">
-		<div class="col-lg-6 col-lg-offset-3">
-			<?php
-			$id = @$_GET['id'];
-			$sql_rekammedis = mysqli_query($con, "SELECT * FROM tb_rekammedis INNER JOIN tb_satwa ON tb_rekammedis.id_satwa = tb_satwa.id_satwa INNER JOIN tb_user ON tb_rekammedis.id_user = tb_user.id_user WHERE id_rm = '$id'") or die(mysqli_error($con));
-			$data = mysqli_fetch_array($sql_rekammedis);
-			?>
-			<form action="proses.php" method="post">
+
+	<?php
+	$id = @$_GET['id'];
+	$sql_rekammedis = mysqli_query($con, "SELECT * FROM tb_rekammedis INNER JOIN tb_satwa ON tb_rekammedis.id_satwa = tb_satwa.id_satwa INNER JOIN tb_user ON tb_rekammedis.id_user = tb_user.id_user WHERE id_rm = '$id'") or die(mysqli_error($con));
+	$data = mysqli_fetch_array($sql_rekammedis);
+	?>
+
+	<form action="proses.php" method="post" enctype="multipart/form-data" id="form">
+		<div class="row">
+			<div class="col-md-6">
 				<input type="hidden" name="id" value="<?= $data['id_rm'] ?>">
 				<div class="form-group">
 					<label for="tgl">Tanggal Periksa</label>
@@ -46,6 +48,8 @@ include_once('../_header.php');
 					<label for="keluhan">Keluhan</label>
 					<textarea name="keluhan" id="keluhan" class="form-control" required=""><?= $data['keluhan']; ?></textarea>
 				</div>
+			</div>
+			<div class="col-md-6">
 				<div class="form-group">
 					<label for="dokter">Nama Dokter</label>
 					<select name="dokter" id="dokter" class="form-control" required="">
@@ -96,17 +100,50 @@ include_once('../_header.php');
 						?>
 					</select>
 				</div>
+
 				<div class="form-group">
-					<input type="reset" name="reset" value="Reset" class="btn btn-default">
+					<label for="gambar">Foto Kondisi</label>
+					<div>
+						<input type="hidden" name="gbrLama" value="<?= $data['gambar'] ?>">
+						<img src="<?= base_url() ?>/_assets/gambar/<?= $data['gambar'] ?>" alt="Gambar kondisi" class="img-thumbnail mb-4 tampil" width="120px">
+						<input type="file" class="form-control form-control-sm" name="gambar" id="gambar" onchange="imgView()" style="margin-top: 5px">
+						<span class="text-sm">Tipe file gambar JPG | PNG | GIF</span>
+					</div>
+        </div>
+				<div class="form-group">
 					<input type="submit" name="edit" value="Simpan" class="btn btn-success">
 				</div>
-			</form>
+			</div>
 		</div>
-	</div>
+	</form>
+
 </div>
 
 <script>
 	CKEDITOR.replace( 'keluhan' );
+</script>
+
+
+<script>
+  let defaultSrc;
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const tampil = document.querySelector('.tampil');
+    defaultSrc = tampil.src;
+  });
+
+  function imgView() {
+    const gambar = document.getElementById('gambar');
+    const tampil = document.querySelector('.tampil');
+
+    if (gambar.files && gambar.files[0]) {
+      const fileReader = new FileReader();
+      fileReader.onload = (e) => {
+        tampil.src = e.target.result;
+      };
+      fileReader.readAsDataURL(gambar.files[0]);
+    }
+  }
 </script>
 
 
