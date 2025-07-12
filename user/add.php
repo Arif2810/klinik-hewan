@@ -36,7 +36,7 @@ include_once('../_header.php');
 						<option value="">-- Pilih Level --</option>
 						<option value="1">Administrator</option>
 						<option value="2">Petugas</option>
-						<option value="3">Dokter</option>
+						<!-- <option value="3">Dokter</option> -->
 					</select>
 				</div>
 

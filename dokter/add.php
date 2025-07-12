@@ -16,19 +16,23 @@ include_once('../_header.php');
 			<form action="proses.php" method="post">
 				<div class="form-group">
 					<label for="nama">Nama Dokter</label>
-					<input type="text" name="nama" id="nama" class="form-control" required="" autofocus="">
+					<input type="text" name="nama" id="nama" class="form-control" required autofocus>
 				</div>
 				<div class="form-group">
-					<label for="spesialis">Spesialis</label>
-					<input type="text" name="spesialis" id="spesialis" class="form-control" required="">
+					<label for="username">Username</label>
+					<input type="text" name="username" id="username" class="form-control" required>
+				</div>
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input type="password" name="password" id="password" class="form-control" required>
 				</div>
 				<div class="form-group">
 					<label for="alamat">Alamat</label>
-					<textarea name="alamat" id="alamat" class="form-control" required=""></textarea>
+					<textarea name="alamat" id="alamat" class="form-control" required></textarea>
 				</div>
 				<div class="form-group">
 					<label for="telp">No. Telepon</label>
-					<input type="number" name="telp" id="telp" class="form-control" required="">
+					<input type="number" name="telp" id="telp" class="form-control" required>
 				</div>
 				<div class="form-group">
 					<input type="submit" name="add" value="Simpan" class="btn btn-success">

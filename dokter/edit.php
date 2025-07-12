@@ -15,18 +15,20 @@ include_once('../_header.php');
 		<div class="col-lg-6 col-lg-offset-3">
 			<?php
 			$id = @$_GET['id'];
-			$sql_dokter = mysqli_query($con, "SELECT * FROM tb_dokter WHERE id_dokter='$id'") or die(mysqli_error($con));
+			$sql_dokter = mysqli_query($con, "SELECT tb_dokter.*, tb_user.nama_user, tb_user.username FROM tb_dokter JOIN tb_user ON tb_dokter.id_user = tb_user.id_user WHERE id_dokter = '$id'") or die(mysqli_error($con));
 			$data = mysqli_fetch_array($sql_dokter);
 			?>
 			<form action="proses.php" method="post">
 				<div class="form-group">
 					<label for="nama">Nama Dokter</label>
 					<input type="hidden" name="id" value="<?= $data['id_dokter'] ?>">
-					<input type="text" name="nama" id="nama" value="<?= $data['nama_dokter'] ?>" class="form-control" required="" autofocus="">
+					<input type="hidden" name="id_user" value="<?= $data['id_user'] ?>">
+					<input type="text" name="nama" id="nama" value="<?= $data['nama_user'] ?>" class="form-control" required autofocus>
 				</div>
 				<div class="form-group">
-					<label for="spesialis">Spesialis</label>
-					<input type="text" name="spesialis" id="spesialis" value="<?= $data['spesialis'] ?>" class="form-control" required="">
+					<label for="username">Username</label>
+					<input type="hidden" name="usernameLama" value="<?= $data['username'] ?>">
+					<input type="text" name="username" id="username" value="<?= $data['username'] ?>" class="form-control" required autofocus>
 				</div>
 				<div class="form-group">
 					<label for="alamat">Alamat</label>

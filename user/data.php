@@ -41,7 +41,7 @@ if($_SESSION['level'] != 1){
 					<tbody>
 					<?php
 						$no = 1;
-						$sql_user = mysqli_query($con, "SELECT * FROM tb_user") or die(mysqli_error($con));
+						$sql_user = mysqli_query($con, "SELECT * FROM tb_user WHERE level != 3") or die(mysqli_error($con));
 						while($data = mysqli_fetch_array($sql_user)){ 
 							$level = $data['level'];
 						?>

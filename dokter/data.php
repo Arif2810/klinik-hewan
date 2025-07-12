@@ -18,7 +18,7 @@ if($_SESSION['level'] == 3){
 			<small>Data Dokter</small>
 			<div class="pull-right">
 				<a href="" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-refresh"></i></a>
-				<a href="../user/add.php" class="btn btn-success btn-xs" onclick="return confirm('Dokter adalah User dengan level 3, Anda diarahkan ke halaman tambah user')"><i class="glyphicon glyphicon-plus"></i> Tambah Dokter</a>
+				<a href="add.php" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i> Tambah Dokter</a>
 			</div>
 		</h4>
 		<form method="post" name="proses">
@@ -34,23 +34,27 @@ if($_SESSION['level'] == 3){
 							<th>No.</th>
 							<th>Nama Dokter</th>
 							<th>Username</th>
+							<th>Alamat</th>
+							<th>No Telepon</th>
 							<th><i class="glyphicon glyphicon-cog"></i></th>
 						</tr>
 					</thead>
 					<tbody>
 					<?php
 						$no = 1;
-						$sql_dokter = mysqli_query($con, "SELECT * FROM tb_user WHERE level = 3 ORDER BY nama_user ASC") or die(mysqli_error($con));
+						$sql_dokter = mysqli_query($con, "SELECT tb_dokter.*, tb_user.nama_user, tb_user.username FROM tb_dokter JOIN tb_user ON tb_dokter.id_user = tb_user.id_user ORDER BY tb_user.nama_user ASC") or die(mysqli_error($con));
 						while($data = mysqli_fetch_array($sql_dokter)){ ?>
 							<tr>
 								<td align="center">
-									<input type="checkbox" name="checked[]" class="check" value="<?= $data['id_user']; ?>">
+									<input type="checkbox" name="checked[]" class="check" value="<?= $data['id_dokter']; ?>">
 								</td>
 								<td><?= $no++; ?>.</td>
 								<td><?= $data['nama_user']; ?></td>
 								<td><?= $data['username']; ?></td>
+								<td><?= $data['alamat']; ?></td>
+								<td><?= $data['no_telp']; ?></td>
 								<td align="center">
-									<a onclick="return confirm('Anda diarahkan ke halaman edit user')" href="../user/edit.php?id=<?= $data['id_user']; ?>" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-edit"></i></a>
+									<a href="edit.php?id=<?= $data['id_dokter']; ?>" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-edit"></i></a>
 								</td>
 							</tr>
 						<?php
@@ -74,7 +78,7 @@ if($_SESSION['level'] == 3){
 			columnDefs: [{
 				"searchable": false,
 				"orderable": false,
-				"targets": [0, 4]
+				"targets": [0, 6]
 			}],
 			"order": [1, "asc"]
 		});

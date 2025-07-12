@@ -51,23 +51,6 @@ include_once('../_header.php');
 			</div>
 			<div class="col-md-6">
 				<div class="form-group">
-					<label for="dokter">Nama Dokter</label>
-					<select name="dokter" id="dokter" class="form-control" required="">
-						<option value="">- Pilih -</option>
-						<?php
-						$sql_dokter = mysqli_query($con, "SELECT * FROM tb_user WHERE level = 3") or die(mysqli_error($con));
-						while($data_dokter = mysqli_fetch_array($sql_dokter)){
-							if($data['id_user'] == $data_dokter['id_user']){
-								$select = "selected";
-							}
-							else{
-								$select = "";
-							}
-							echo '<option '.$select.' value="'.$data_dokter['id_user'].'">'.$data_dokter['nama_user'].'</option>';
-						} ?>
-					</select>
-				</div>
-				<div class="form-group">
 					<label for="diagnosa">Diagnosa</label>
 					<textarea name="diagnosa" id="diagnosa" class="form-control" required="" rows="4"><?= $data['diagnosa']; ?></textarea>
 				</div>
@@ -100,7 +83,23 @@ include_once('../_header.php');
 						?>
 					</select>
 				</div>
-
+				<div class="form-group">
+					<label for="dokter">Nama Dokter</label>
+					<select name="dokter" id="dokter" class="form-control" required="">
+						<option value="">- Pilih -</option>
+						<?php
+						$sql_dokter = mysqli_query($con, "SELECT * FROM tb_user WHERE level = 3") or die(mysqli_error($con));
+						while($data_dokter = mysqli_fetch_array($sql_dokter)){
+							if($data['id_user'] == $data_dokter['id_user']){
+								$select = "selected";
+							}
+							else{
+								$select = "";
+							}
+							echo '<option '.$select.' value="'.$data_dokter['id_user'].'">'.$data_dokter['nama_user'].'</option>';
+						} ?>
+					</select>
+				</div>
 				<div class="form-group">
 					<label for="gambar">Foto Kondisi</label>
 					<div>
