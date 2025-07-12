@@ -27,7 +27,7 @@
 					<tbody>
 						<?php
 						$no = 1;
-						$query = "SELECT * FROM tb_satwa INNER JOIN tb_jenis ON tb_satwa.id_jenis = tb_jenis.id_jenis";
+						$query = "SELECT * FROM tb_satwa";
 						$sql_satwa = mysqli_query($con, $query) or die(mysqli_error($con));
 						while($data = mysqli_fetch_array($sql_satwa)){ ?>
 							<tr>

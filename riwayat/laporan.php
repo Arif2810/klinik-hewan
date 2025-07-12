@@ -10,7 +10,7 @@ use Dompdf\Dompdf;
 // Inisialisasi Dompdf
 $dompdf = new Dompdf();
 $id = $_GET['id'];
-$querySatwa = mysqli_query($con, "SELECT * FROM tb_satwa INNER JOIN tb_jenis ON tb_satwa.id_jenis = tb_jenis.id_jenis WHERE id_satwa = '$id'");
+$querySatwa = mysqli_query($con, "SELECT * FROM tb_satwa WHERE id_satwa = '$id'");
 $satwa = mysqli_fetch_assoc($querySatwa);
 $satwa['jenis_kelamin'] == 'L' ? $gender = 'Jantan' : $gender = 'Betina';
 

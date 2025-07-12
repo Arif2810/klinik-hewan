@@ -54,16 +54,24 @@
 			$('#satwa').DataTable({
 				dom: 'Bfrtip',
 				buttons: [
-					'copy',
 					{
-							extend: 'excel',
-							messageTop: 'The information in this table is copyright to Sirius Cybernetics Corp.'
+						extend: 'copyHtml5',
+						title: 'Data Satwa - TRMS Serulingmas Interactive Zoo Banjarnegara'
 					},
 					{
-						extend: 'csv'
+						extend: 'excelHtml5',
+						title: 'Data Satwa',
+						sheetName: 'Data Satwa',
+						messageTop: 'TRMS Serulingmas Interactive Zoo Banjarnegara'
+
+					},
+					{
+						extend: 'csvHtml5',
+						title: 'Data Satwa - TRMS Serulingmas Interactive Zoo Banjarnegara'
 					},
 					{
 						extend: 'pdfHtml5',
+						title: 'Laporan Satwa - TRMS Serulingmas Interactive Zoo Banjarnegara',
 						download: 'open',
 						messageBottom: null
 					}
